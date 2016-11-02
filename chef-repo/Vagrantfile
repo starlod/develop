@@ -1,0 +1,47 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+
+  config.vm.define "develop" do |node|
+
+    # ネットワーク設定
+    node.vm.network "private_network", ip: "192.168.33.20"
+    node.vm.hostname = "local"
+    node.hostsupdater.aliases = %w[
+      laravel.local
+      django.local
+    ]
+
+    # 共有フォルダ
+    # node.vm.synced_folder ".", "/vagrant", disabled: true
+    # node.vm.synced_folder "../public", "/home/vagrant/public", create: true, mount_options: ['dmode=777','fmode=775'], nfs: false
+    # node.vm.synced_folder "../symfony", "/home/vagrant/symfony", create: true, mount_options: ['dmode=777','fmode=775'], nfs: false
+    # node.vm.synced_folder "../laravel", "/home/vagrant/laravel", create: true, mount_options: ['dmode=777','fmode=775'], nfs: false
+    # node.vm.synced_folder "../rails", "/home/vagrant/rails", create: true, mount_options: ['dmode=777','fmode=775'], nfs: false
+    # node.vm.synced_folder "../django", "/home/vagrant/django", create: true, mount_options: ['dmode=777','fmode=775'], nfs: false
+
+    # ver1.8.5 対策
+    # http://ja.stackoverflow.com/questions/10987/insecure-private-key-%E3%81%AE%E7%BD%AE%E3%81%8D%E6%8F%9B%E3%81%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
+    # http://helen.hatenablog.com/entry/2016/08/22/135126
+    node.ssh.insert_key = false
+
+    # VirtualBox設定
+    node.vm.provider :virtualbox do |vb|
+      vb.cpus = 1
+      vb.memory = 1024
+      vb.linked_clone = true
+    end
+  end
+
+  config.vm.provision :shell, :path => "provision.sh"
+
+  if Vagrant.has_plugin?("vagrant-vbguest") then
+   config.vbguest.auto_update = true
+  end
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+end
