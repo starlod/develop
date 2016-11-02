@@ -1,0 +1,16 @@
+; PHP の CLI 版に対してオペコード・キャッシュを有効にします。
+opcache.enable_cli = 1
+; OPcache によって使用される共有メモリ・ストレージのサイズ。（MB単位）
+opcache.memory_consumption = 128
+; インターン (intern) された文字列を格納するために使用されるメモリ量。（MB単位）
+opcache.interned_strings_buffer = 8
+; OPcache ハッシュテーブルのキー（すなわちスクリプト）の最大数。
+opcache.max_accelerated_files = 4000
+; 更新のためにスクリプトのタイムスタンプをチェックする頻度。（秒単位）
+; 0にすると、OPcacheは、リクエストごとに更新をチェックします。
+; ※開発モードの時は0にしないと、変更したコードの更新されず混乱する場合があるので注意。
+;opcache.revalidate_freq = 60
+opcache.revalidate_freq = 0
+; 有効にすると、それぞれに割り当てられたブロックを解放しない、高速シャットダウン・シーケンスが使用されます。
+; しかし、リクエスト変数のすべてのセットをひとまとめに割当てを解除することは、Zend Engineのメモリ・マネージャに依存します。
+opcache.fast_shutdown = 1
