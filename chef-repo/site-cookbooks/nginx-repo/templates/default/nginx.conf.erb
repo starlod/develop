@@ -1,0 +1,47 @@
+user nginx;
+# nginxのworkerプロセスの数を設定します。通常はCPUのコア数以下に設定します。
+worker_processes auto;
+
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
+
+# Load dynamic modules. See /usr/share/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
+
+events {
+    # 一つのworkerプロセスが同時に処理できる最大コネクション数を設定します。
+    worker_connections 1024;
+}
+
+#----------------------------------------
+# アクセス全般に対してのデフォルト設定
+#----------------------------------------
+http {
+    #---------------------------
+    # 基本設定
+    #---------------------------
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    charset       utf-8;
+
+    #----------------------------
+    # ログフォーマットの設定
+    #----------------------------
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    # アクセスログの設定
+    access_log  /var/log/nginx/access.log main;
+
+    # vagrantの場合はここをOFFにしないと更新ファイルが反映されない場合がある
+    # 参考：http://qiita.com/shoyan/items/12389d5beaa8695b1a53
+    sendfile            <%= node["nginx"]["sendfile"] %>;
+    #tcp_nopush          on;
+    #tcp_nodelay         on;
+
+    keepalive_timeout   65;
+    types_hash_max_size 2048;
+
+    include /etc/nginx/conf.d/*.conf;
+}

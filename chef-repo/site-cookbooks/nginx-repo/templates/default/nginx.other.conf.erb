@@ -1,0 +1,11 @@
+#-----------------------------
+# その他の設定
+#-----------------------------
+# 413 Request Entity Too Largeが出る場合があるので大きめに設定しておく
+#client_max_body_size    10m;
+#client_body_buffer_size 256k;
+
+# nginxのバージョン情報を隠す
+server_tokens off;
+# クライアントがリクエストしてきたHostヘッダの文字列をLocationのホスト名として使う
+server_name_in_redirect off;
