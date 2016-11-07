@@ -1,19 +1,16 @@
 {
   "run_list": [
+    "site-user::default",
     "selinux::disabled",
     "yum-cron::default",
     "git::default",
     "ntp::default",
-    "develop::devtools",
+    "devtools::default",
     "apache::default",
     "php::default",
-    "mysql57::default",
+    "mysql-repo::default",
     "ruby::default",
     "nodejs::default",
-    "python::default",
-    "develop::default"
-  ],
-  "automatic": {
-    "ipaddress": "develop"
-  }
+    "python::default"
+  ]
 }
