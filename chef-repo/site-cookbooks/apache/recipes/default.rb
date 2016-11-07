@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'yum::default'
-include_recipe 'yum-ius::default'
+include_recipe "yum::default"
+include_recipe "yum-ius::default"
 
 %W[
   httpd
@@ -27,5 +27,5 @@ service "httpd" do
 end
 
 template "/etc/httpd/conf/httpd.conf" do
-  notifies :reload, 'service[httpd]'
+  notifies :reload, "service[httpd]"
 end
