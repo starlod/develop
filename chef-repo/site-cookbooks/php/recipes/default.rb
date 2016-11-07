@@ -7,17 +7,18 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'yum::default'
-include_recipe 'yum-remi::default'
+include_recipe "yum::default"
+include_recipe "yum-remi::default"
 
 %w[
   gd-last
   t1lib
 ].each do |pkg|
-    package pkg do
-        action [ :install ]
-        options "--enablerepo=remi"
-    end
+  package pkg do
+    action [ :install ]
+    options "--enablerepo=remi"
+    flush_cache [:before]
+  end
 end
 
 %w[
@@ -39,7 +40,7 @@ end
 ].each do |pkg|
   package pkg do
     action :install
-    options '--enablerepo=remi-php71'
+    options "--enablerepo=remi-php71"
   end
 end
 
@@ -52,11 +53,4 @@ execute "composer-install" do
   not_if { File.exists?("/usr/bin/composer")}
 end
 
-%w[
-  /etc/php.ini
-  /etc/php.d/php.opcache.ini
-].each do |ini|
-  template ini do
-    notifies :reload, 'service[httpd]'
-  end
-end
+template "/etc/php.ini"
