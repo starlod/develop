@@ -3,17 +3,18 @@ DEPENDENCIES
     path: site-cookbooks/apache
   ark
   database
-  develop
-    path: site-cookbooks/develop
+  devtools
+    path: site-cookbooks/devtools
   firewalld
   git
   mysql
-  mysql57
-    path: site-cookbooks/mysql57
-  nginx-repo
-    path: site-cookbooks/nginx-repo
+  mysql-repo
+    path: site-cookbooks/mysql-repo
+  nginx
+    path: site-cookbooks/nginx
   nodejs
   ntp
+  openssh
   php
     path: site-cookbooks/php
   python
@@ -22,6 +23,10 @@ DEPENDENCIES
   ruby
     path: site-cookbooks/ruby
   selinux
+  site-user
+    path: site-cookbooks/site-user
+  sudo
+  user
   yum
   yum-cron
   yum-epel
@@ -47,14 +52,8 @@ GRAPH
   compat_resource (12.14.0)
   database (6.0.0)
     postgresql (>= 1.0.0)
-  develop (0.1.0)
+  devtools (0.1.0)
     firewalld (>= 0.0.0)
-    nginx (>= 0.0.0)
-    ntp (>= 0.0.0)
-    poise-python (>= 0.0.0)
-    yum (>= 0.0.0)
-    yum-epel (>= 0.0.0)
-    yum-remi (>= 0.0.0)
   dmg (2.4.0)
   firewalld (1.1.1)
   git (4.6.0)
@@ -64,21 +63,16 @@ GRAPH
     yum-epel (>= 0.0.0)
   homebrew (2.1.2)
     build-essential (>= 2.1.2)
+  iptables (2.2.0)
   mingw (1.2.4)
     compat_resource (>= 0.0.0)
     seven_zip (>= 0.0.0)
   mysql (8.0.2)
-  mysql57 (0.1.0)
+  mysql-repo (0.1.0)
     database (>= 0.0.0)
     mysql (>= 0.0.0)
     yum-mysql-community (>= 0.0.0)
-  nginx (1.8.0)
-    apt (>= 0.0.0)
-    build-essential (>= 0.0.0)
-    ohai (>= 1.1.4)
-    runit (>= 0.0.0)
-    yum (>= 0.0.0)
-  nginx-repo (0.1.0)
+  nginx (0.1.0)
     yum (>= 0.0.0)
     yum-remi (>= 0.0.0)
   nodejs (2.4.4)
@@ -90,20 +84,12 @@ GRAPH
   ntp (3.2.0)
   ohai (4.2.0)
     compat_resource (>= 12.10)
+  openssh (2.1.0)
+    iptables (>= 1.0)
   openssl (6.0.0)
-  packagecloud (0.2.5)
   php (0.1.0)
     yum (>= 0.0.0)
     yum-remi (>= 0.0.0)
-  poise (2.7.1)
-  poise-archive (1.3.0)
-    poise (~> 2.6)
-  poise-languages (2.0.3)
-    poise (~> 2.5)
-    poise-archive (~> 1.0)
-  poise-python (1.5.1)
-    poise (~> 2.7)
-    poise-languages (~> 2.0)
   postgresql (3.4.16)
     apt (>= 1.9.0)
     build-essential (>= 0.0.0)
@@ -116,12 +102,15 @@ GRAPH
     ohai (>= 1.1)
   ruby (0.1.0)
     rbenv (>= 0.0.0)
-  runit (3.0.0)
-    packagecloud (>= 0.0.0)
-    yum-epel (>= 0.0.0)
   selinux (0.9.0)
   seven_zip (2.0.2)
     windows (>= 1.2.2)
+  site-user (0.1.0)
+    openssh (>= 0.0.0)
+    sudo (>= 0.0.0)
+    user (>= 0.0.0)
+  sudo (3.1.0)
+  user (0.5.1)
   windows (1.44.3)
     chef_handler (>= 0.0.0)
   yum (3.12.0)
