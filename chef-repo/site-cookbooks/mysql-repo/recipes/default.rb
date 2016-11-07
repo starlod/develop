@@ -20,43 +20,42 @@ end
 %W{ mysql-devel }.each do |pkg|
   package pkg do
     action [ :install, :upgrade ]
-    options "--enablerepo=mysql57-community"
   end
 end
 
 # MySQL用のプロバイダー
 # https://docs.chef.io/resource_chef_gem.html
 # http://www.creationline.com/lab/7833
-chef_gem 'mysql2' do
+chef_gem "mysql2" do
   compile_time false if respond_to?(:compile_time)
 end
 
 # MySQL server
-mysql_service 'default' do
-  version node['mysql']['version']
-  package_version node['mysql']['package_version']
-  port node['mysql']['port']
-  initial_root_password node['mysql']['initial_root_password']
+mysql_service "default" do
+  version node[:mysql][:version]
+  package_version node[:mysql][:package_version]
+  port node[:mysql][:port]
+  initial_root_password node[:mysql][:initial_root_password]
   action [:create, :start]
 end
 
 # MySQL client
-mysql_client 'default' do
-  version node['mysql']['version']
-  package_version node['mysql']['package_version']
+mysql_client "default" do
+  version node[:mysql][:version]
+  package_version node[:mysql][:package_version]
   action :create
 end
 
 # MySQL接続情報
 mysql_connection_info = {
-  host: 'localhost',
-  username: 'root',
-  socket: '/var/run/mysql-default/mysqld.sock',
-  password: node['mysql']['initial_root_password']
+  host: "localhost",
+  username: "root",
+  socket: "/var/run/mysql-default/mysqld.sock",
+  password: node[:mysql][:initial_root_password]
 }
 
 # データベース作成
-node['mysql']['databases'].each do |database|
+node[:mysql][:databases].each do |database|
   mysql_database database do
     connection mysql_connection_info
     action :create
@@ -64,7 +63,7 @@ node['mysql']['databases'].each do |database|
 end
 
 # ユーザー追加
-node['mysql']['users'].each do |user|
+node[:mysql][:users].each do |user|
   user["databases"].each do |database|
     mysql_database_user user["username"] do
       connection mysql_connection_info
