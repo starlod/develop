@@ -7,22 +7,22 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'yum-epel::default'
+include_recipe "yum-epel::default"
 
 package "nodejs" do
   action [ :install, :upgrade ]
 end
 
-node['nodejs']['npm_packages'].each do |pkg|
-  f = nodejs_npm pkg['name'] do
+node[:nodejs][:npm_packages].each do |pkg|
+  f = nodejs_npm pkg[:name] do
     action :nothing
   end
   pkg.each do |key, value|
-    f.send(key, value) unless key == 'name' || key == 'action'
+    f.send(key, value) unless key == "name" || key == "action"
   end
-  action = pkg.key?('action') ? pkg['action'] : :install
+  action = pkg.key?("action") ? pkg[:action] : :install
   f.action(action)
-end if node['nodejs'].key?('npm_packages')
+end if node[:nodejs].key?("npm_packages")
 
 # {
 #   "/usr/local/bin/npm-check-updates" => "/usr/bin/npm-check-updates",

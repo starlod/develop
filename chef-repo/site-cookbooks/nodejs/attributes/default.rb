@@ -1,4 +1,4 @@
-default['nodejs']['npm_packages'] = [
+default[:nodejs][:npm_packages] = [
   {
     "name": "npm-check-updates"
   },
