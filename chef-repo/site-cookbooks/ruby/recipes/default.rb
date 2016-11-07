@@ -26,7 +26,7 @@ end
 # iconv --version
 
 # Ruby & gem install
-node["ruby"]["versions"].each { |v|
+node[:ruby][:versions].each { |v|
   # 指定バージョンのrubyをインストール
   rbenv_ruby v["version"] do
     ruby_version v["version"]
