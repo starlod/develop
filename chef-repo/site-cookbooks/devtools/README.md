@@ -1,4 +1,4 @@
-# develop Cookbook
+# devtools Cookbook
 
 TODO: Enter the cookbook description here.
 
@@ -20,14 +20,14 @@ e.g.
 
 ### Cookbooks
 
-- `toaster` - develop needs toaster to brown your bagel.
+- `toaster` - devtools needs toaster to brown your bagel.
 
 ## Attributes
 
 TODO: List your cookbook attributes here.
 
 e.g.
-### develop::default
+### devtools::default
 
 <table>
   <tr>
@@ -37,7 +37,7 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['dev']['bacon']</tt></td>
+    <td><tt>['devtools']['bacon']</tt></td>
     <td>Boolean</td>
     <td>whether to include bacon</td>
     <td><tt>true</tt></td>
@@ -46,18 +46,18 @@ e.g.
 
 ## Usage
 
-### develop::default
+### devtools::default
 
 TODO: Write usage instructions for each cookbook.
 
 e.g.
-Just include `dev` in your node's `run_list`:
+Just include `devtools` in your node's `run_list`:
 
 ```json
 {
   "name":"my_node",
   "run_list": [
-    "recipe[dev]"
+    "recipe[devtools]"
   ]
 }
 ```

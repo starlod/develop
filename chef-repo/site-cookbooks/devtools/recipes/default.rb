@@ -1,11 +1,13 @@
 #
-# Cookbook Name:: booking
-# Recipe:: mkdir
+# Cookbook Name:: devtools
+# Recipe:: default
 #
 # Copyright 2016, YOUR_COMPANY_NAME
 #
 # All rights reserved - Do Not Redistribute
 #
+
+include_recipe "firewalld::enable"
 
 # 公開ディレクトリを作成
 %w[
@@ -69,7 +71,6 @@ end
   openssl-devel
   wget
   curl
-  vim
 ].each do |pkg|
   package pkg do
     action [:install, :upgrade]
