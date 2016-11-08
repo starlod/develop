@@ -1,6 +1,6 @@
 # develop
 
-[開発環境の準備をしておく](https://github.com/starlod/develop/wiki/開発環境構築)
+[開発環境の準備をしておく](https://github.com/starlod/develop/wiki/開発環境構築（Mac）)
 
 ## Mac
 
